@@ -1,0 +1,37 @@
+{
+    "name": "illuma-law/laravel-cache-swoole-table",
+    "description": "A Laravel Cache driver using Swoole\Table for shared memory storage.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IllumaLaw\\SwooleTableCache\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.3|^8.4|^8.5",
+        "ext-swoole": "*",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0|^11.0|^12.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IllumaLaw\\SwooleTableCache\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IllumaLaw\\SwooleTableCache\\SwooleTableCacheServiceProvider"
+            ]
+        }
+    }
+}
