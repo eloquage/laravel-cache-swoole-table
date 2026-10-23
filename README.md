@@ -1,91 +1,59 @@
 # Laravel Swoole Table Cache
 
-A Laravel Cache driver using `Swoole\Table` for high-performance shared memory storage.
+![Laravel Swoole Table Cache package banner](art/banner.png)
 
-This driver is ideal for applications running under Swoole or Laravel Octane that need a fast, shared memory cache with minimal overhead.
+A Laravel cache driver backed by [`Swoole\Table`](https://openswoole.com/docs/modules/swoole-table). It is intended for persistent Swoole or Octane workers that need a fast, process-shared in-memory cache.
 
-## Features
+Requires PHP 8.3+ (8.3, 8.4, or 8.5), Laravel 11, 12, or 13, and the Swoole PHP extension.
 
-- **High Performance:** Uses `Swoole\Table` which is implemented in C and resides in shared memory.
-- **Atomic Operations:** Supports atomic `increment` and `decrement` via Swoole's native `Table::incr` and `Table::decr`.
-- **Octane Ready:** Perfect for sharing state between Octane workers.
-- **TTL Support:** Handles expiration automatically within the driver.
+## Install
 
-## Requirements
-
-- PHP 8.3 or newer
-- Laravel 11, 12, or 13
-- The `swoole` PHP extension enabled
-
-## Installation
-
-1. **Require the package** with Composer:
-
-```shell
+```bash
 composer require illuma-law/laravel-cache-swoole-table
 ```
 
-## Step-by-Step Setup
-
-### 1. Configure the Cache Store
-
-Add the `swoole-table` store to your `config/cache.php` file:
+Add a store to `config/cache.php`:
 
 ```php
 'stores' => [
-    // ... other stores
-    
     'swoole-table' => [
         'driver' => 'swoole-table',
-        'table_size' => env('SWOOLE_CACHE_TABLE_SIZE', 1024), // Number of rows
-        'value_size' => env('SWOOLE_CACHE_VALUE_SIZE', 65536), // Max size of serialized value in bytes
+        'table_size' => 1024, // Maximum number of cache entries
+        'value_size' => 65536, // Maximum serialized value size in bytes
     ],
 ],
 ```
 
-### 2. Set as Default (Optional)
-
-Update your `.env` file to use Swoole Table as the default cache store:
-
-```env
-CACHE_STORE=swoole-table
-```
-
-### 3. Verify Installation
-
-You can verify the driver is working by using Artisan tinker:
-
-```shell
-php artisan tinker
-```
+Use it like another Laravel cache store:
 
 ```php
 use Illuminate\Support\Facades\Cache;
 
-Cache::store('swoole-table')->put('test', 'it works', 10);
-echo Cache::store('swoole-table')->get('test'); // "it works"
+$cache = Cache::store('swoole-table');
+$cache->put('visits', 1, 60);
+$cache->increment('visits');
+
+$count = $cache->get('visits'); // 2
 ```
 
-## Configuration Options
+You can make it the default store with `CACHE_STORE=swoole-table`.
 
-- `table_size`: The maximum number of rows the table can hold. Must be a power of 2.
-- `value_size`: The maximum size (in bytes) for a single cached item. Exceeding this will cause truncation or failure.
+## Notes
 
-## Usage
+- Entries live in memory and are lost when the Swoole table is recreated. This is not a persistent or cross-host cache.
+- `table_size` sets the row capacity. Choose enough rows for the number of keys the application will store.
+- `value_size` must fit the serialized value. `Swoole\Table::set()` can fail when the table is full or a value exceeds its configured column width.
+- TTL expiration is checked when a key is read.
 
-Use the driver like any other Laravel cache store:
+## Tests
 
-```php
-use Illuminate\Support\Facades\Cache;
-
-// Using the default store (if set to swoole-table)
-Cache::put('key', 'value', 60);
-
-// Explicitly using the swoole-table store
-Cache::store('swoole-table')->put('visits', 1, 60);
-Cache::store('swoole-table')->increment('visits');
+```bash
+composer install
+composer test
 ```
+
+The test environment must have the Swoole extension enabled.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+MIT. See [LICENSE.md](LICENSE.md).
