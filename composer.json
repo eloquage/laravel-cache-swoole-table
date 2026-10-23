@@ -1,6 +1,6 @@
 {
     "name": "illuma-law/laravel-cache-swoole-table",
-    "description": "A Laravel Cache driver using Swoole\Table for shared memory storage.",
+    "description": "A Laravel Cache driver using Swoole\\Table for shared memory storage.",
     "type": "library",
     "license": "MIT",
     "autoload": {
