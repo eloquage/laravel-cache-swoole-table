@@ -33,5 +33,10 @@
                 "IllumaLaw\\SwooleTableCache\\SwooleTableCacheServiceProvider"
             ]
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
