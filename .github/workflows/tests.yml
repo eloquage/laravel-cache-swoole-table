@@ -50,6 +50,8 @@ jobs:
           composer require "illuminate/contracts:${{ matrix.laravel }}" "illuminate/support:${{ matrix.laravel }}" --no-interaction --no-update --ignore-platform-reqs
           composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-interaction --no-update --ignore-platform-reqs
       - name: Install dependencies
+        env:
+          COMPOSER_NO_BLOCKING: "1"
         run: composer update --prefer-stable --prefer-dist --no-interaction
       - name: Run tests
         run: composer test
