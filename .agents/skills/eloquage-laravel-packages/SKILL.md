@@ -7,7 +7,7 @@ metadata:
 
 # Laravel package development
 
-Use this skill when changing this Composer package: `illuma-law/laravel-cache-swoole-table` — A Laravel Cache driver using Swoole\Table for shared memory storage.
+Use this skill when changing this Composer package: `eloquage/laravel-cache-swoole-table` — A Laravel Cache driver using Swoole\Table for shared memory storage.
 
 ## Package context
 

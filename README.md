@@ -9,7 +9,7 @@ Requires PHP 8.3+ (8.3, 8.4, or 8.5), Laravel 11, 12, or 13, and the Swoole PHP 
 ## Install
 
 ```bash
-composer require illuma-law/laravel-cache-swoole-table
+composer require eloquage/laravel-cache-swoole-table
 ```
 
 Add a store to `config/cache.php`:

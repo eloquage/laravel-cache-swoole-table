@@ -7,7 +7,7 @@ metadata:
 
 # Writing and documentation
 
-Write documentation for `illuma-law/laravel-cache-swoole-table` (A Laravel Cache driver using Swoole\Table for shared memory storage.) that lets the intended reader complete a concrete task.
+Write documentation for `eloquage/laravel-cache-swoole-table` (A Laravel Cache driver using Swoole\Table for shared memory storage.) that lets the intended reader complete a concrete task.
 
 ## Source and structure
 
