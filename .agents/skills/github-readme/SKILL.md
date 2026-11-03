@@ -7,7 +7,7 @@ metadata:
 
 # GitHub README
 
-For `illuma-law/laravel-cache-swoole-table` (A Laravel Cache driver using Swoole\Table for shared memory storage.), make the README useful to a developer deciding whether to install the package and then trying it in a real application.
+For `eloquage/laravel-cache-swoole-table` (A Laravel Cache driver using Swoole\Table for shared memory storage.), make the README useful to a developer deciding whether to install the package and then trying it in a real application.
 
 ## Ground every claim
 
